@@ -95,4 +95,50 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   setClock(".timer", deadLine);
+
+  //Modal
+  const btn = document.querySelectorAll("[data-modal]"),
+    close = document.querySelector("[data-close]"),
+    modal = document.querySelector(".modal");
+
+  function showModal() {
+    modal.style.display = "block";
+  }
+  function hideModal() {
+    modal.style.display = "none";
+  }
+
+  btn.forEach((item) => {
+    item.addEventListener("click", () => {
+      showModal();
+      document.body.style.overflow = "hidden"; //строчка отвечает за блокировку прокрутки страницы при открытом модале
+    });
+
+    close.addEventListener("click", () => {
+      hideModal();
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        hideModal();
+      } //функция закрывающая модал при клике вне его области
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.code === "Escape" && hideModal()) {
+        hideModal();
+      } //функция закрывающая модал при нажатии на кнопку Escape
+    });
+  });
+
+  // btn.forEach((item) => {
+  //   item.addEventListener("click", () => {
+  //     modal.classList.add("show");
+  //     modal.classList.remove("hide");
+  //   });
+  // });
+  // close.addEventListener("click", () => {
+  //   modal.classList.add("hide");
+  //   modal.classList.remove("show");
+  // });
 });
